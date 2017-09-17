@@ -25,7 +25,7 @@ def map2():
 @application.route("/map3")
 def map3():
 
-	# °Ù¶ÈµØÍ¼ Direction API v1.0Web·şÎñAPI
+	# ç™¾åº¦åœ°å›¾ Direction API v1.0WebæœåŠ¡API
 	# http://lbsyun.baidu.com/index.php?title=webapi/direction-api
 
 	# json format tool
@@ -35,20 +35,20 @@ def map3():
 	# https://docs.python.org/3.5/library/urllib.request.html#urllib-examples
 
 	#print(datas)
-	#datas = {"text": "ÖĞÎÄ","polyline": "116.621248,41.02831"}
+	#datas = {"text": "ä¸­æ–‡","polyline": "116.621248,41.02831"}
 
 	#print(json.dumps(datas,encoding="utf-8",sort_keys=False,ensure_ascii=False,indent=2))
-	#url = 'api.map.baidu.com/direction/v1?mode=driving&origin=ÊúĞÂÅÉ³öËù&destination=ÉÏº£ĞÂ»ªÒ½Ôº&origin_region=ÉÏº£&destination_region=ÉÏº£&output=json&ak=67c1ea196201cb1521170cf746fb7466'
+	#url = 'api.map.baidu.com/direction/v1?mode=driving&origin=ç«–æ–°æ´¾å‡ºæ‰€&destination=ä¸Šæµ·æ–°ååŒ»é™¢&origin_region=ä¸Šæµ·&destination_region=ä¸Šæµ·&output=json&ak=67c1ea196201cb1521170cf746fb7466'
 
 	params = {
-		'mode': 'driving',
-		'origin': u'ÂÌÉ«Ã×À¼°ÂÌØÀ³Ë¹',
-		'destination': u'ËÄÆ½Â·773ºÅ½ğ´óµØÉÌÎñÂ¥',
-		'origin_region': u'ÉÏº£',
-		'destination_region': u'ÉÏº£',
-		'waypoints': u'ÉÏº£ÊĞ°°É½ÊµÑéÖĞÑ§',
-		'output': 'json',
-		'ak': '67c1ea196201cb1521170cf746fb7466'
+'mode': 'driving',
+'origin': u'ç»¿è‰²ç±³å…°å¥¥ç‰¹è±æ–¯',
+'destination': u'å››å¹³è·¯773å·é‡‘å¤§åœ°å•†åŠ¡æ¥¼',
+'origin_region': u'ä¸Šæµ·',
+'destination_region': u'ä¸Šæµ·',
+'waypoints': u'ä¸Šæµ·å¸‚éå±±å®éªŒä¸­å­¦',
+'output': 'json',
+'ak': '67c1ea196201cb1521170cf746fb7466'
 	}
 	url= 'http://api.map.baidu.com/direction/v1?%s' % urllib.parse.urlencode(params)
 
@@ -60,7 +60,7 @@ def map3():
 
 	#print (dt.strftime('%Y-%m-%d %H:%M:%S'))
 	# http://api.map.baidu.com/direction/v1?mode=driving&origin=%E7%AB%96%E6%96%B0%E6%B4%BE%E5%87%BA%E6%89%80&destination=%E4%B8%8A%E6%B5%B7%E6%96%B0%E5%8D%8E%E5%8C%BB%E9%99%A2&origin_region=%E4%B8%8A%E6%B5%B7&destination_region=%E4%B8%8A%E6%B5%B7&output=json&ak=67c1ea196201cb1521170cf746fb7466
-	#url = 'http://api.map.baidu.com/direction/v1?mode=driving&origin=ÊúĞÂÅÉ³öËù&destination=ÉÏº£ĞÂ»ªÒ½Ôº&origin_region=ÉÏº£&destination_region=ÉÏº£&output=json&ak=67c1ea196201cb1521170cf746fb7466'
+	#url = 'http://api.map.baidu.com/direction/v1?mode=driving&origin=ç«–æ–°æ´¾å‡ºæ‰€&destination=ä¸Šæµ·æ–°ååŒ»é™¢&origin_region=ä¸Šæµ·&destination_region=ä¸Šæµ·&output=json&ak=67c1ea196201cb1521170cf746fb7466'
 	html = urllib.request.urlopen(url).read().decode('utf-8')
 	json_data = json.loads(html)
 	json_data['dt']=dt.strftime('%Y-%m-%d %H:%M:%S')
