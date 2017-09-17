@@ -41,14 +41,14 @@ def map3():
 	#url = 'api.map.baidu.com/direction/v1?mode=driving&origin=竖新派出所&destination=上海新华医院&origin_region=上海&destination_region=上海&output=json&ak=67c1ea196201cb1521170cf746fb7466'
 
 	params = {
-'mode': 'driving',
-'origin': u'绿色米兰奥特莱斯',
-'destination': u'四平路773号金大地商务楼',
-'origin_region': u'上海',
-'destination_region': u'上海',
-'waypoints': u'上海市鞍山实验中学',
-'output': 'json',
-'ak': '67c1ea196201cb1521170cf746fb7466'
+		'mode': 'driving',
+		'origin': u'绿色米兰奥特莱斯',
+		'destination': u'四平路773号金大地商务楼',
+		'origin_region': u'上海',
+		'destination_region': u'上海',
+		'waypoints': u'上海市鞍山实验中学',
+		'output': 'json',
+		'ak': '67c1ea196201cb1521170cf746fb7466'
 	}
 	url= 'http://api.map.baidu.com/direction/v1?%s' % urllib.parse.urlencode(params)
 
