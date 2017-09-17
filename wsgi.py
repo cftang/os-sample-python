@@ -42,11 +42,11 @@ def map3():
 
 	params = {
 		'mode': 'driving',
-		'origin': '绿色米兰奥特莱斯',
-		'destination': '四平路773号金大地商务楼',
-		'origin_region': '上海',
-		'destination_region': '上海',
-		'waypoints': '上海市鞍山实验中学',
+		'origin': u'绿色米兰奥特莱斯',
+		'destination': u'四平路773号金大地商务楼',
+		'origin_region': u'上海',
+		'destination_region': u'上海',
+		'waypoints': u'上海市鞍山实验中学',
 		'output': 'json',
 		'ak': '67c1ea196201cb1521170cf746fb7466'
 	}
