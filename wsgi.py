@@ -56,7 +56,7 @@ def map3():
 	#	print(f.read().decode('utf-8'))
 
 	tz = pytz.timezone('Asia/Shanghai')
-	dt = datetime.datetime.now(tz)
+	dt = datetime.datetime.now(tz) 
 
 	#print (dt.strftime('%Y-%m-%d %H:%M:%S'))
 	# http://api.map.baidu.com/direction/v1?mode=driving&origin=%E7%AB%96%E6%96%B0%E6%B4%BE%E5%87%BA%E6%89%80&destination=%E4%B8%8A%E6%B5%B7%E6%96%B0%E5%8D%8E%E5%8C%BB%E9%99%A2&origin_region=%E4%B8%8A%E6%B5%B7&destination_region=%E4%B8%8A%E6%B5%B7&output=json&ak=67c1ea196201cb1521170cf746fb7466
