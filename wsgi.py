@@ -2,9 +2,10 @@
 import json
 import urllib.request
 import urllib.parse
-import time
 import datetime
 import pytz
+from testMongo import save2mongo
+from copy import deepcopy
 
 from flask import Flask
 
@@ -51,8 +52,10 @@ def map2():
     # print json_data['result']['destination']['wd']
     # print json_data['result']['traffic_condition']
     # print(json.dumps(json_data,encoding="utf-8", indent=4, sort_keys=False, ensure_ascii=False))
+    #json_data = json.loads(html)
+    json_data2 = deepcopy(json_data)
+    save2mongo('baidu','map2', json_data2)
     return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
-
 
 @application.route("/map3")
 def map3():
@@ -83,8 +86,10 @@ def map3():
     # print json_data['result']['destination']['wd']
     # print json_data['result']['traffic_condition']
     # print(json.dumps(json_data,encoding="utf-8", indent=4, sort_keys=False, ensure_ascii=False))
+    #return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
+    json_data2 = deepcopy(json_data)
+    save2mongo('baidu','map3', json_data2)
     return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
-
 
 if __name__ == "__main__":
     application.run()
