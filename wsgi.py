@@ -8,6 +8,7 @@ from testMongo import save2mongo
 from copy import deepcopy
 
 from flask import Flask
+from flask import request
 
 application = Flask(__name__)
 
@@ -19,11 +20,16 @@ def hello():
 
 @application.route("/map1")
 def map1():
-    return "Hello World! map1"
-
+    show = request.args.get('show')
+    if show=='y':
+        return "Hello World! map1"
+    else:
+        return '0'
 
 @application.route("/map2")
 def map2():
+    show = request.args.get('show')
+
     params = {
         'mode': 'driving',
         'origin': u'绿色米兰奥特莱斯',
@@ -55,10 +61,15 @@ def map2():
     #json_data = json.loads(html)
     json_data2 = deepcopy(json_data)
     save2mongo('baidu','map2', json_data2)
-    return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
+    if show=='y':
+        return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
+    else:
+        return '0'
 
 @application.route("/map3")
 def map3():
+    show = request.args.get('show')
+
     params = {
         'mode': 'driving',
         'origin': '竖新派出所',
@@ -89,7 +100,10 @@ def map3():
     #return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
     json_data2 = deepcopy(json_data)
     save2mongo('baidu','map3', json_data2)
-    return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
+    if show=='y':
+        return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
+    else:
+        return '0'
 
 if __name__ == "__main__":
     application.run()
