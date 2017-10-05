@@ -2,3 +2,4 @@ gunicorn
 Flask
 pytz
 pymongo
+pika
