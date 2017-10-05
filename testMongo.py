@@ -6,7 +6,6 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from send import h1
 
-
 def save2rabbitmq(doc):
     z = {'dt': doc['dt'],
          'distance': doc['result']['taxi']['distance'],
@@ -16,11 +15,10 @@ def save2rabbitmq(doc):
          'duration4': doc['result']['routes'][0]['steps'][4]['duration'],
          'traffic_condition4': doc['result']['routes'][0]['steps'][4]['traffic_condition']
          }
-    print(z)
-    # h1(z)
+    print (z)
+    h1(z)
 
-
-def save2mongo(dbname, collection, doc):
+def save2mongo(dbname,collection,doc):
     try:
         hostname = os.getenv('HOSTNAME')
         if hostname:
@@ -34,9 +32,8 @@ def save2mongo(dbname, collection, doc):
         sys.exit(1)
     dbh = c[dbname]
     dbh[collection].insert(doc)
-    print("Successfully inserted document: %s" % doc)
+    print ("Successfully inserted document: %s" % doc)
     save2rabbitmq(doc)
-
 
 def main():
     user_doc = {
@@ -48,7 +45,6 @@ def main():
         "score": 0
     }
     save2mongo('baidu', 'mycoll', user_doc)
-
 
 if __name__ == "__main__":
     main()
