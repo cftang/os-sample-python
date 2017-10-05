@@ -1,4 +1,5 @@
 import pika
+import json
 
 def h1(doc):
 
@@ -17,7 +18,7 @@ def h1(doc):
 
     channel.basic_publish(exchange='amq.direct',
                           routing_key='h1',
-                          body=doc,
+                          body=json.dumps(doc),
                           properties=pika.BasicProperties(delivery_mode=2))
 
     print ( " [x] Sent:" + doc )
