@@ -21,7 +21,7 @@ def h1(doc):
                           body=json.dumps(doc),
                           properties=pika.BasicProperties(delivery_mode=2))
 
-    print ( " [x] Sent:" + doc )
+    print ( " [x] Sent:" + json.dumps(doc) )
 
     connection.close()
 
