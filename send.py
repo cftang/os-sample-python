@@ -12,10 +12,10 @@ def h1(doc):
 
     # We need to bind this channel to an exchange, that will be used to transfer
     # messages from our delay queue.
-    channel.queue_bind(exchange='',
+    channel.queue_bind(exchange='amq.direct',
                        queue='h1')
 
-    channel.basic_publish(exchange='',
+    channel.basic_publish(exchange='amq.direct',
                           routing_key='h1',
                           body=doc,
                           properties=pika.BasicProperties(delivery_mode=2))
@@ -23,3 +23,16 @@ def h1(doc):
     print ( " [x] Sent:" + doc )
 
     connection.close()
+
+def main():
+    user_doc = {
+    "username" : "janedoe",
+    "firstname" : "Jane",
+    "surname" : "Doe",
+    "email" : "janedoe74@example.com",
+    "score" : 0
+    }
+    h1( user_doc)
+
+if __name__ == "__main__":
+    main()
