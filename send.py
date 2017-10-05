@@ -1,9 +1,10 @@
 import pika
 import json
 
-def h1(doc):
 
-    parameters = pika.URLParameters( 'amqp://rtjojptm:wTajVRnB9IWJgI1KdHBdLLSxaAJtFTHm@mosquito.rmq.cloudamqp.com/rtjojptm' )
+def h1(doc):
+    parameters = pika.URLParameters(
+        'amqp://rtjojptm:wTajVRnB9IWJgI1KdHBdLLSxaAJtFTHm@mosquito.rmq.cloudamqp.com/rtjojptm')
     connection = pika.BlockingConnection(parameters)
 
     # Create normal 'Hello World' type channel.
@@ -21,19 +22,21 @@ def h1(doc):
                           body=json.dumps(doc),
                           properties=pika.BasicProperties(delivery_mode=2))
 
-    print ( " [x] Sent:" + json.dumps(doc) )
+    print(" [x] Sent:" + json.dumps(doc))
 
     connection.close()
 
+
 def main():
     user_doc = {
-    "username" : "janedoe",
-    "firstname" : "Jane",
-    "surname" : "Doe",
-    "email" : "janedoe74@example.com",
-    "score" : 0
+        "username": "janedoe",
+        "firstname": "Jane",
+        "surname": "Doe",
+        "email": "janedoe74@example.com",
+        "score": 0
     }
-    h1( user_doc)
+    h1(user_doc)
+
 
 if __name__ == "__main__":
     main()
