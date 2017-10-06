@@ -1,3 +1,4 @@
+#!/opt/app-root/bin/python
 import pika
 import json
 import time
