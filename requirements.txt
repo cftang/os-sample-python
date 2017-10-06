@@ -3,3 +3,4 @@ Flask
 pytz
 pymongo
 pika
+numpy
