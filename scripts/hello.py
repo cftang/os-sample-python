@@ -7,6 +7,8 @@ import plotly.plotly as py
 import plotly.tools as tls
 import plotly.graph_objs as go
 
+from scripts.dateadd import dayAdd
+
 stream_ids = tls.get_credentials_file()['stream_ids']
 
 token_1 = stream_ids[0]   
@@ -64,7 +66,7 @@ def callback(ch, method, properties, p_body):
     j = json.loads( p_body.decode("utf-8") )
     distance = j['distance']
     if distance > 0 :
-        x = j['dt']
+        x = dayAdd(j['dt'],1)
         y = j['duration4']
         print (x)
         print (y)
