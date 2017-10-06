@@ -1,7 +1,7 @@
 
-mkdir .plotly
+mkdir ~/.plotly
 
-mv /opt/app-root/src/scripts/.credentials .plotly
+mv /opt/app-root/src/scripts/.credentials ~/.plotly
 
 nohup python /opt/app-root/src/scripts/sd.heartbeat.py > /tmp/heartbeat.out &
 
