@@ -7,7 +7,7 @@ import plotly.plotly as py
 import plotly.tools as tls
 import plotly.graph_objs as go
 
-from scripts.dateadd import dayAdd
+from dateadd import dayAdd
 
 stream_ids = tls.get_credentials_file()['stream_ids']
 
