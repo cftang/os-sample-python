@@ -6,3 +6,4 @@ pika
 numpy
 plotly
 psycopg2
+pandas
