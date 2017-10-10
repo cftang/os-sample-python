@@ -100,13 +100,13 @@ def myplotly(df1,df2):
         x=df1['dt'],
         y=df1['traffic_condition4'],
         name='yesterday traffic condition',
-        marker= {"color": "rgb(255,127,14)"}
+        marker= {"color": "rgb(31,119,180)"}
     )
     trace3 = go.Scatter(
         x=df2['dt'],
         y=df2['duration4'],
         name='today duration',
-        marker= {"color": "rgb(31,119,180)"}
+        marker= {"color": "rgb(255,127,14)"}
     )
     trace4 = go.Scatter(
         x=df2['dt'],
