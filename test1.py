@@ -93,26 +93,26 @@ def myplotly(df1,df2):
     trace1 = go.Scatter(
         x=df1['dt'],
         y=df1['duration4'],
-        name='today duration',
+        name='yesterday duration',
         marker= {"color": "rgb(31,119,180)"}
     )
     trace2 = go.Scatter(
         x=df1['dt'],
         y=df1['traffic_condition4'],
-        name='today traffic condition',
+        name='yesterday traffic condition',
         marker= {"color": "rgb(255,127,14)"}
     )
     trace3 = go.Scatter(
         x=df2['dt'],
         y=df2['duration4'],
-        name='yesterday duration',
-        marker= {"color": "rgb(214,39,40)"}
+        name='today duration',
+        marker= {"color": "rgb(31,119,180)"}
     )
     trace4 = go.Scatter(
         x=df2['dt'],
         y=df2['traffic_condition4'],
-        name='yesterday traffic condition',
-        marker= {"color": "rgb(148,103,189)"}
+        name='today traffic condition',
+        marker= {"color": "rgb(255,127,14)"}
     )
     data = [trace1, trace2, trace3, trace4]
     layout = go.Layout(
