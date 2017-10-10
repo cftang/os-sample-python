@@ -61,22 +61,29 @@ def findlast2day(dbname,collection):
     list1 = []
     list2 = []
     row = 0
+    d2 = ''
+    for doc in z:
+        d2 = doc['dt']
+    d2 = d2[0:10]
+    d1 = dayAdd(d2[0:10]+' 00:00:00',-1)[0:10]
+
+    z.rewind()
     for doc in z: 
         #print(doc)
         row+=1
         dt = doc['dt']
-        distance = doc['result']['taxi']['distance'],
+        #distance = doc['result']['taxi']['distance'],
         duration = doc['result']['taxi']['duration'],
-        traffic_condition = doc['result']['traffic_condition']*100+500,
-        distance4 = doc['result']['routes'][0]['steps'][4]['distance'],
+        traffic_condition = doc['result']['traffic_condition']*100,
+        #distance4 = doc['result']['routes'][0]['steps'][4]['distance'],
         duration4 = doc['result']['routes'][0]['steps'][4]['duration'],
-        traffic_condition4 = doc['result']['routes'][0]['steps'][4]['traffic_condition']*100
+        traffic_condition4 = doc['result']['routes'][0]['steps'][4]['traffic_condition']*100+600
         #print ('%s,%d,%d,%d,%d' % ( dt ,duration[0], traffic_condition[0], duration4[0], traffic_condition4) )
-        if row < 288:
+        if dt.startswith(d1):
             dt = dayAdd(dt,1)
             list1.append({'dt':dt,'duration':duration,'traffic_condition':traffic_condition,
                      'duration4':duration4,'traffic_condition4':traffic_condition4}) 
-        else:
+        elif dt.startswith(d2):
             list2.append({'dt':dt,'duration':duration,'traffic_condition':traffic_condition,
                      'duration4':duration4,'traffic_condition4':traffic_condition4}) 
     print ("Successfully retrieved document: %d" % z.count(True) )
