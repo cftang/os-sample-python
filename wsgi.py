@@ -17,6 +17,9 @@ application = Flask(__name__)
 def hello():
     return "Hello World! python 3.5"
 
+@application.route("/plot")
+def plot():
+    return "<iframe width=\"900\" height=\"800\" frameborder=\"0\" scrolling=\"no\" src=\"//plot.ly/~cftang/15.embed\"></iframe>"
 
 @application.route("/map1")
 def map1():
