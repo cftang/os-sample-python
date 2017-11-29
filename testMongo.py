@@ -4,6 +4,7 @@ import sys
 from datetime import datetime
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
+from bson.objectid import ObjectId
 from send import save2rabbitmqH1
 
 def save2mongo(dbname,collection,doc):
@@ -18,9 +19,13 @@ def save2mongo(dbname,collection,doc):
     except ConnectionFailure as e:
         sys.stderr.write("Could not connect to MongoDB: %s" % e)
         sys.exit(1)
+        
     dbh = c[dbname]
+    
+    datetime.strptime(doc['dt'], '%Y-%m-%d %H:%M:%S') 
+    dummy_id = ObjectId.from_datetime(gen_time)
 
-    z = {'dt': doc['dt'],
+    z = {'dt': doc['dt'],'_id':dummy_id,
              'distance': doc['result']['taxi']['distance'],
              'duration': doc['result']['taxi']['duration'],
              'traffic_condition': doc['result']['traffic_condition'],
