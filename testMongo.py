@@ -24,10 +24,10 @@ def save2mongo(dbname,collection,doc):
         
     dbh = c[dbname]
     
-    gen_time = datetime.strptime(doc['dt'], '%Y-%m-%d %H:%M:%S') 
-    dummy_id = ObjectId.from_datetime(gen_time)
+    #gen_time = datetime.strptime(doc['dt'], '%Y-%m-%d %H:%M:%S') 
+    #dummy_id = ObjectId.from_datetime(gen_time)
 
-    z = {'dt': doc['dt'],'_id':dummy_id,
+    z = {'dt': doc['dt'],
              'distance': doc['result']['taxi']['distance'],
              'duration': doc['result']['taxi']['duration'],
              'traffic_condition': doc['result']['traffic_condition'],
@@ -36,6 +36,7 @@ def save2mongo(dbname,collection,doc):
              'traffic_condition4': doc['result']['routes'][0]['steps'][4]['traffic_condition']
              }
     z_mq = deepcopy(z)
+    
     dbh[collection].insert(z)
     print ("Successfully inserted document: %s" % z)
     print (json.dumps(z_mq))
