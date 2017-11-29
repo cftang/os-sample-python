@@ -5,6 +5,7 @@ from datetime import datetime
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from bson.objectid import ObjectId
+from copy import deepcopy
 from send import save2rabbitmqH1
 
 def save2mongo(dbname,collection,doc):
@@ -33,10 +34,10 @@ def save2mongo(dbname,collection,doc):
              'duration4': doc['result']['routes'][0]['steps'][4]['duration'],
              'traffic_condition4': doc['result']['routes'][0]['steps'][4]['traffic_condition']
              }
-
+    z_mq = deepcopy(z)
     dbh[collection].insert(z)
     print ("Successfully inserted document: %s" % z)
-    save2rabbitmqH1(z)
+    save2rabbitmqH1(z_mq)
 
 def main():
     user_doc = {
