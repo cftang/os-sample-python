@@ -6,6 +6,7 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from bson.objectid import ObjectId
 from copy import deepcopy
+import json
 from send import save2rabbitmqH1
 
 def save2mongo(dbname,collection,doc):
@@ -37,6 +38,7 @@ def save2mongo(dbname,collection,doc):
     z_mq = deepcopy(z)
     dbh[collection].insert(z)
     print ("Successfully inserted document: %s" % z)
+    print (json.dumps(z_mq))
     save2rabbitmqH1(z_mq)
 
 def main():
