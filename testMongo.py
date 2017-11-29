@@ -4,19 +4,7 @@ import sys
 from datetime import datetime
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
-from send import h1
-
-def save2rabbitmq(doc):
-    z = {'dt': doc['dt'],
-         'distance': doc['result']['taxi']['distance'],
-         'duration': doc['result']['taxi']['duration'],
-         'traffic_condition': doc['result']['traffic_condition'],
-         'distance4': doc['result']['routes'][0]['steps'][4]['distance'],
-         'duration4': doc['result']['routes'][0]['steps'][4]['duration'],
-         'traffic_condition4': doc['result']['routes'][0]['steps'][4]['traffic_condition']
-         }
-    print (z)
-    h1(z)
+from send import save2rabbitmqH1
 
 def save2mongo(dbname,collection,doc):
     try:
@@ -31,9 +19,19 @@ def save2mongo(dbname,collection,doc):
         sys.stderr.write("Could not connect to MongoDB: %s" % e)
         sys.exit(1)
     dbh = c[dbname]
-    dbh[collection].insert(doc)
-    print ("Successfully inserted document: %s" % doc)
-    save2rabbitmq(doc)
+
+    z = {'dt': doc['dt'],
+             'distance': doc['result']['taxi']['distance'],
+             'duration': doc['result']['taxi']['duration'],
+             'traffic_condition': doc['result']['traffic_condition'],
+             'distance4': doc['result']['routes'][0]['steps'][4]['distance'],
+             'duration4': doc['result']['routes'][0]['steps'][4]['duration'],
+             'traffic_condition4': doc['result']['routes'][0]['steps'][4]['traffic_condition']
+             }
+
+    dbh[collection].insert(z)
+    print ("Successfully inserted document: %s" % z)
+    save2rabbitmqH1(z)
 
 def main():
     user_doc = {

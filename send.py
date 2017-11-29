@@ -2,7 +2,7 @@ import pika
 import json
 
 
-def h1(doc):
+def save2rabbitmqH1(doc):
     parameters = pika.URLParameters(
         'amqp://rtjojptm:wTajVRnB9IWJgI1KdHBdLLSxaAJtFTHm@mosquito.rmq.cloudamqp.com/rtjojptm')
     connection = pika.BlockingConnection(parameters)
