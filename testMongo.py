@@ -22,7 +22,7 @@ def save2mongo(dbname,collection,doc):
         
     dbh = c[dbname]
     
-    datetime.strptime(doc['dt'], '%Y-%m-%d %H:%M:%S') 
+    gen_time = datetime.strptime(doc['dt'], '%Y-%m-%d %H:%M:%S') 
     dummy_id = ObjectId.from_datetime(gen_time)
 
     z = {'dt': doc['dt'],'_id':dummy_id,
@@ -43,7 +43,7 @@ def main():
         "username": "janedoe",
         "firstname": "Jane",
         "surname": "Doe",
-        "dateofbirth": datetime(1975, 1, 1),
+        "dt": datetime(1975, 1, 1),
         "email": "janedoe74@example.com",
         "score": 0
     }
