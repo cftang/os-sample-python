@@ -39,7 +39,7 @@ def save2mongo(dbname,collection,doc):
     
     dbh[collection].insert(z)
     print ("Successfully inserted document: %s" % z)
-    print (json.dumps(z_mq))
+    
     save2rabbitmqH1(z_mq)
 
 def main():
