@@ -21,10 +21,10 @@ stream_id2 = dict(token=token_2, maxpoints=288)
 stream_id3 = dict(token=token_3, maxpoints=288)
 stream_id4 = dict(token=token_4, maxpoints=288)
 
-trace1 = go.Scatter(x=[], y=[], stream=stream_id1, name='trace1')
-trace2 = go.Scatter(x=[], y=[], stream=stream_id2, name='trace2', marker=dict(color='rgb(148, 103, 18)'))
-trace3 = go.Scatter(x=[], y=[], stream=stream_id3, name='trace3', marker=dict(color='rgb(48, 153, 89)'))
-trace4 = go.Scatter(x=[], y=[], stream=stream_id4, name='trace4', marker=dict(color='rgb(8, 203, 189)'))
+trace1 = go.Scatter(x=[], y=[], stream=stream_id1, name='durataion(today)')
+trace2 = go.Scatter(x=[], y=[], stream=stream_id2, name='traffic condition(today)', marker=dict(color='rgb(148, 103, 18)'))
+trace3 = go.Scatter(x=[], y=[], stream=stream_id3, name='duration(yesterday)', marker=dict(color='rgb(48, 153, 89)'))
+trace4 = go.Scatter(x=[], y=[], stream=stream_id4, name='traffic condition(yesterday)', marker=dict(color='rgb(8, 203, 189)'))
 
 data = [trace1, trace2, trace3, trace4 ]
 layout = go.Layout(
