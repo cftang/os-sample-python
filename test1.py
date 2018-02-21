@@ -24,7 +24,7 @@ def save2rabbitmq(doc):
 def save2mongo(dbname,collection,doc):
     try:
         hostname = os.getenv('HOSTNAME')
-        #hostname = 'x'
+        hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
             print("cloud")
@@ -73,11 +73,11 @@ def findlast2day(dbname,collection):
         #print(doc)
         row += 1
         dt = doc['dt']
-        duration4 = doc['duration4'],
-        traffic_condition4 = doc['traffic_condition4']*100+600
+        duration4 = int(doc['duration4']/60),
+        traffic_condition4 = doc['traffic_condition4']*5
         #print ('%s,%d,%d,%d,%d' % ( dt ,duration[0], traffic_condition[0], duration4[0], traffic_condition4) )
         if dt.startswith(d1):
-            dt = dayAdd(dt,1)
+            dt = dayAdd(dt, 1)
             list1.append({'dt': dt, 'duration4': duration4, 'traffic_condition4': traffic_condition4})
         elif dt.startswith(d2):
             list2.append({'dt': dt, 'duration4': duration4, 'traffic_condition4': traffic_condition4})
@@ -95,30 +95,31 @@ def myplotly(df1,df2):
     trace1 = go.Scatter(
         x=df1['dt'],
         y=df1['duration4'],
-        name='yesterday duration',
+        name=u'昨天行程时间（分钟）',
         marker={"color": "rgb(31,119,180)"}
     )
     trace2 = go.Scatter(
         x=df1['dt'],
         y=df1['traffic_condition4'],
-        name='yesterday traffic condition',
+        name=u'昨天路况',
         marker={"color": "rgb(31,119,180)"}
     )
     trace3 = go.Scatter(
         x=df2['dt'],
         y=df2['duration4'],
-        name='today duration',
+        name=u'今天行程时间（分钟）',
         marker={"color": "rgb(255,127,14)"}
     )
     trace4 = go.Scatter(
         x=df2['dt'],
         y=df2['traffic_condition4'],
-        name='today traffic condition',
+        name=u'今天路况',
         marker={"color": "rgb(255,127,14)"}
     )
     data = [trace1, trace2, trace3, trace4]
     layout = go.Layout(
-        title=u'G40崇明陈家镇收费口->上海高东收费口路况'
+        title=u'G40沪陕高速(崇明陈家镇收费口->上海高东收费口)路况 更新时间:'
+              + df2['dt'][len(df2.index) - 1]
     )
     fig = go.Figure(data=data, layout=layout)
     py.plot(fig, filename='multiple-axes-multiple', fileopt='overwrite', auto_open=False)
