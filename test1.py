@@ -4,7 +4,7 @@ import sys
 from datetime import datetime
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
-from send import h1
+#from send import h1
 import pandas as pd
 import plotly.plotly as py
 import plotly.graph_objs as go
@@ -19,8 +19,7 @@ def save2rabbitmq(doc):
          'duration4': doc['result']['routes'][0]['steps'][4]['duration'],
          'traffic_condition4': doc['result']['routes'][0]['steps'][4]['traffic_condition']
          }
-    print (z)
-    h1(z)
+    print(z)
 
 def save2mongo(dbname,collection,doc):
     try:
@@ -42,6 +41,7 @@ def save2mongo(dbname,collection,doc):
 def findlast2day(dbname,collection):
     try:
         hostname = os.getenv('HOSTNAME')
+        hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
             print("cloud")
@@ -52,7 +52,7 @@ def findlast2day(dbname,collection):
         sys.stderr.write("Could not connect to MongoDB: %s" % e)
         sys.exit(1)
     dbh = c[dbname]
-    c = dbh[collection].count() -288*2
+    c = dbh[collection].count() - 288*2
     z = dbh[collection].find(skip=c)
     #z = dbh[collection].find({'dt': '2017-10-08 01:22:38'}).limit(1)
 
@@ -65,35 +65,29 @@ def findlast2day(dbname,collection):
     for doc in z:
         d2 = doc['dt']
     d2 = d2[0:10]
-    d1 = dayAdd(d2[0:10]+' 00:00:00',-1)[0:10]
+    d1 = dayAdd(d2[0:10]+' 00:00:00', -1)[0:10]
 
     z.rewind()
     for doc in z: 
         #print(doc)
-        row+=1
+        row += 1
         dt = doc['dt']
-        #distance = doc['result']['taxi']['distance'],
-        duration = doc['result']['taxi']['duration'],
-        traffic_condition = doc['result']['traffic_condition']*100,
-        #distance4 = doc['result']['routes'][0]['steps'][4]['distance'],
-        duration4 = doc['result']['routes'][0]['steps'][4]['duration'],
-        traffic_condition4 = doc['result']['routes'][0]['steps'][4]['traffic_condition']*100+600
+        duration4 = doc['duration4'],
+        traffic_condition4 = doc['traffic_condition4']*100+600
         #print ('%s,%d,%d,%d,%d' % ( dt ,duration[0], traffic_condition[0], duration4[0], traffic_condition4) )
         if dt.startswith(d1):
             dt = dayAdd(dt,1)
-            list1.append({'dt':dt,'duration':duration,'traffic_condition':traffic_condition,
-                     'duration4':duration4,'traffic_condition4':traffic_condition4}) 
+            list1.append({'dt': dt, 'duration4': duration4, 'traffic_condition4': traffic_condition4})
         elif dt.startswith(d2):
-            list2.append({'dt':dt,'duration':duration,'traffic_condition':traffic_condition,
-                     'duration4':duration4,'traffic_condition4':traffic_condition4}) 
-    print ("Successfully retrieved document: %d" % z.count(True) )
+            list2.append({'dt': dt, 'duration4': duration4, 'traffic_condition4': traffic_condition4})
+    print("Successfully retrieved document: %d" % z.count(True))
     # https://docs.mongodb.com/manual/reference/method/cursor.count/#cursor.count
     # applySkipLimit
 
     #print (len(list))
     df1 = pd.DataFrame(list1)
     df2 = pd.DataFrame(list2)
-    myplotly(df1,df2)
+    myplotly(df1, df2)
 
 def myplotly(df1,df2):
 
@@ -101,32 +95,32 @@ def myplotly(df1,df2):
         x=df1['dt'],
         y=df1['duration4'],
         name='yesterday duration',
-        marker= {"color": "rgb(31,119,180)"}
+        marker={"color": "rgb(31,119,180)"}
     )
     trace2 = go.Scatter(
         x=df1['dt'],
         y=df1['traffic_condition4'],
         name='yesterday traffic condition',
-        marker= {"color": "rgb(31,119,180)"}
+        marker={"color": "rgb(31,119,180)"}
     )
     trace3 = go.Scatter(
         x=df2['dt'],
         y=df2['duration4'],
         name='today duration',
-        marker= {"color": "rgb(255,127,14)"}
+        marker={"color": "rgb(255,127,14)"}
     )
     trace4 = go.Scatter(
         x=df2['dt'],
         y=df2['traffic_condition4'],
         name='today traffic condition',
-        marker= {"color": "rgb(255,127,14)"}
+        marker={"color": "rgb(255,127,14)"}
     )
     data = [trace1, trace2, trace3, trace4]
     layout = go.Layout(
         title='multiple y-axes example'
     )
     fig = go.Figure(data=data, layout=layout)
-    plot_url = py.plot(fig, filename='multiple-axes-multiple',fileopt='overwrite')
+    py.plot(fig, filename='multiple-axes-multiple', fileopt='overwrite', auto_open=False)
 
 def main():
     user_doc = {
@@ -140,4 +134,4 @@ def main():
     save2mongo('baidu', 'mycoll', user_doc)
 
 if __name__ == "__main__":
-    findlast2day('baidu','map3')
+    findlast2day('baidu', 'map3')

@@ -20,7 +20,8 @@ def hello():
 
 @application.route("/plot")
 def plot():
-    return "<iframe width=\"900\" height=\"800\" frameborder=\"0\" scrolling=\"no\" src=\"//plot.ly/~cftang/24.embed\"></iframe>"
+    return "<iframe width=\"900\" height=\"800\" frameborder=\"0\" \
+             scrolling=\"no\" src=\"//plot.ly/~cftang/28.embed\"></iframe>"
 
 @application.route("/plot1")
 def plot1():

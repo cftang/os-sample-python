@@ -14,6 +14,8 @@ data = Data([trace0, trace1])
 
 py.plot(data, filename='basic-line', fileopt='overwrite', auto_open=False)
 '''
+
+# offline plot
 import plotly.plotly as py
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 

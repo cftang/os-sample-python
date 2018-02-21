@@ -21,6 +21,7 @@ def save2rabbitmq(doc):
     print (z)
     h1(z)
 
+
 def save2mongo(dbname,collection,doc):
     try:
         hostname = os.getenv('HOSTNAME')
@@ -37,6 +38,7 @@ def save2mongo(dbname,collection,doc):
     dbh[collection].insert(doc)
     print ("Successfully inserted document: %s" % doc)
     #save2rabbitmq(doc)
+
 
 def findlast2day(dbname,collection):
     try:
@@ -78,38 +80,38 @@ def findlast2day(dbname,collection):
     df = pd.DataFrame(list)
     myplotly(df)
 
-def myplotly(df):
 
+def myplotly(df):
     trace1 = go.Scatter(
         x=df['dt'],
         y=df['duration'],
         name='today duration',
-        marker= {"color": "rgb(31,119,180)"}
+        marker={"color": "rgb(31,119,180)"}
     )
     trace2 = go.Scatter(
         x=df['dt'],
         y=df['traffic_condition'],
         name='today traffic condition',
-        marker= {"color": "rgb(255,127,14)"}
+        marker={"color": "rgb(255,127,14)"}
     )
     trace3 = go.Scatter(
         x=df['dt'],
         y=df['duration4'],
         name='yesterday duration',
-        marker= {"color": "rgb(214,39,40)"}
+        marker={"color": "rgb(214,39,40)"}
     )
     trace4 = go.Scatter(
         x=df['dt'],
         y=df['traffic_condition4'],
         name='yesterday traffic condition',
-        marker= {"color": "rgb(148,103,189)"}
+        marker={"color": "rgb(148,103,189)"}
     )
     data = [trace1, trace2, trace3, trace4]
     layout = go.Layout(
         title='multiple y-axes example'
     )
     fig = go.Figure(data=data, layout=layout)
-    plot_url = py.plot(fig, filename='multiple-axes-multiple',fileopt='overwrite')
+    plot_url = py.plot(fig, filename='multiple-axes-multiple', fileopt='overwrite')
 
 def main():
     user_doc = {
