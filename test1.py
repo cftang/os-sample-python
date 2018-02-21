@@ -24,6 +24,7 @@ def save2rabbitmq(doc):
 def save2mongo(dbname,collection,doc):
     try:
         hostname = os.getenv('HOSTNAME')
+        #hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
             print("cloud")
@@ -41,7 +42,7 @@ def save2mongo(dbname,collection,doc):
 def findlast2day(dbname,collection):
     try:
         hostname = os.getenv('HOSTNAME')
-        hostname = 'x'
+        #hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
             print("cloud")
@@ -117,7 +118,7 @@ def myplotly(df1,df2):
     )
     data = [trace1, trace2, trace3, trace4]
     layout = go.Layout(
-        title='multiple y-axes example'
+        title=u'G40崇明陈家镇收费口->上海高东收费口路况'
     )
     fig = go.Figure(data=data, layout=layout)
     py.plot(fig, filename='multiple-axes-multiple', fileopt='overwrite', auto_open=False)
