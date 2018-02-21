@@ -7,19 +7,28 @@ import pytz
 from testMongo import save2mongo
 from copy import deepcopy
 
-from flask import Flask
-from flask import request
+from flask import Flask, request, send_from_directory
 
-application = Flask(__name__)
-
+application = Flask(__name__, static_url_path='')
 
 @application.route("/")
 def hello():
     return "Hello World! python 3.5"
 
+# How to serve static files in Flask
+# https://stackoverflow.com/questions/20646822/how-to-serve-static-files-in-flask
+
 @application.route("/plot")
 def plot():
-    return "<iframe width=\"900\" height=\"800\" frameborder=\"0\" scrolling=\"no\" src=\"//plot.ly/~cftang/15.embed\"></iframe>"
+    return "<iframe width=\"900\" height=\"800\" frameborder=\"0\" scrolling=\"no\" src=\"//plot.ly/~cftang/24.embed\"></iframe>"
+
+@application.route("/plot1")
+def plot1():
+    return application.send_static_file('plot.html')
+
+@application.route('/plot2')
+def plot2():
+    return send_from_directory('scripts', 'temp-plot.html')
 
 @application.route("/map1")
 def map1():
