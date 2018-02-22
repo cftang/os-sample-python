@@ -55,8 +55,7 @@ def findlast2day(dbname, collection, title):
         sys.exit(1)
     dbh = c[dbname]
     c = dbh[collection].count() - 288*2
-    z = dbh[collection].find(projection={"dt": 1, "duration4": 1, "traffic_condition4": 1},
-                             skip=c)\
+    z = dbh[collection].find(projection={"dt": 1, "duration4": 1, "traffic_condition4": 1}, skip=c)\
         .sort("dt", pymongo.ASCENDING)
 
     list1 = []
