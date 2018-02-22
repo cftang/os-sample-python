@@ -123,7 +123,7 @@ def myplotly(df1, df2, collection, title):
         title=title + df2['dt'][len(df2.index) - 1]
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename=collection, fileopt='overwrite', auto_open=False)
+    py.plot(fig, filename='map2', fileopt='overwrite', auto_open=False)
 
 def main():
     user_doc = {
