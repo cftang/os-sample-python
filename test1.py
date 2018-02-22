@@ -4,7 +4,7 @@ import sys
 from datetime import datetime
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
-#from send import h1
+import pymongo
 import pandas as pd
 import plotly.plotly as py
 import plotly.graph_objs as go
@@ -24,7 +24,7 @@ def save2rabbitmq(doc):
 def save2mongo(dbname,collection,doc):
     try:
         hostname = os.getenv('HOSTNAME')
-        hostname = 'x'
+        # hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
             print("cloud")
@@ -55,10 +55,7 @@ def findlast2day(dbname, collection, title):
         sys.exit(1)
     dbh = c[dbname]
     c = dbh[collection].count() - 288*2
-    z = dbh[collection].find(skip=c)
-    #z = dbh[collection].find({'dt': '2017-10-08 01:22:38'}).limit(1)
-
-    #z = dbh[collection].find({'dt': {'$gte':'2017-10-08 01:22:38'}}).limit(2)
+    z = dbh[collection].find(skip=c).sort("dt", pymongo.ASCENDING)
 
     list1 = []
     list2 = []
