@@ -39,10 +39,11 @@ def save2mongo(dbname,collection,doc):
     print ("Successfully inserted document: %s" % doc)
     #save2rabbitmq(doc)
 
-def findlast2day(dbname,collection):
+
+def findlast2day(dbname, collection, title):
     try:
         hostname = os.getenv('HOSTNAME')
-        #hostname = 'x'
+        hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
             print("cloud")
@@ -88,9 +89,10 @@ def findlast2day(dbname,collection):
     #print (len(list))
     df1 = pd.DataFrame(list1)
     df2 = pd.DataFrame(list2)
-    myplotly(df1, df2)
+    myplotly(df1, df2, collection, title)
 
-def myplotly(df1,df2):
+
+def myplotly(df1, df2, collection, title):
 
     trace1 = go.Scatter(
         x=df1['dt'],
@@ -118,11 +120,10 @@ def myplotly(df1,df2):
     )
     data = [trace1, trace2, trace3, trace4]
     layout = go.Layout(
-        title=u'G40沪陕高速(崇明陈家镇收费口->上海高东收费口)路况 更新时间:'
-              + df2['dt'][len(df2.index) - 1]
+        title=title + df2['dt'][len(df2.index) - 1]
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='multiple-axes-multiple', fileopt='overwrite', auto_open=False)
+    py.plot(fig, filename=collection, fileopt='overwrite', auto_open=False)
 
 def main():
     user_doc = {
@@ -135,5 +136,6 @@ def main():
     }
     save2mongo('baidu', 'mycoll', user_doc)
 
+
 if __name__ == "__main__":
-    findlast2day('baidu', 'map3')
+    findlast2day('baidu', sys.argv[1], sys.argv[2])

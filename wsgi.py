@@ -4,7 +4,7 @@ import urllib.request
 import urllib.parse
 import datetime
 import pytz
-from testMongo import save2mongo
+from testMongo import save2mongo, save2mongoMap2
 from copy import deepcopy
 
 from flask import Flask, request, send_from_directory
@@ -45,11 +45,10 @@ def map2():
 
     params = {
         'mode': 'driving',
-        'origin': u'绿色米兰奥特莱斯',
-        'destination': u'四平路773号金大地商务楼',
-        'origin_region': u'上海',
-        'destination_region': u'上海',
-        'waypoints': u'上海市鞍山实验中学',
+        'origin': '国科路29弄1号',
+        'destination': '竖新派出所',
+        'origin_region': '上海',
+        'destination_region': '上海',
         'output': 'json',
         'ak': '67c1ea196201cb1521170cf746fb7466'
     }
@@ -73,8 +72,8 @@ def map2():
     # print(json.dumps(json_data,encoding="utf-8", indent=4, sort_keys=False, ensure_ascii=False))
     #json_data = json.loads(html)
     json_data2 = deepcopy(json_data)
-    save2mongo('baidu','map2', json_data2)
-    if show=='y':
+    save2mongoMap2('baidu', 'map2', json_data2)
+    if show == 'y':
         return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
     else:
         return '0'
@@ -113,10 +112,11 @@ def map3():
     #return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
     json_data2 = deepcopy(json_data)
     save2mongo('baidu','map3', json_data2)
-    if show=='y':
+    if show == 'y':
         return json.dumps(json_data, indent=4, sort_keys=False, ensure_ascii=False) + ','
     else:
         return '0'
+
 
 if __name__ == "__main__":
     application.run()
