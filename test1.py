@@ -43,13 +43,13 @@ def save2mongo(dbname,collection,doc):
 def findlast2day(dbname, collection, title):
     try:
         hostname = os.getenv('HOSTNAME')
-        hostname = 'x'
+        # hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
-            print("cloud")
+            print("cloud" + collection)
         else:
             c = MongoClient("mongodb://user1:password1@localhost:27017/" + dbname)
-            print("local")
+            print("local" + collection)
     except ConnectionFailure as e:
         sys.stderr.write("Could not connect to MongoDB: %s" % e)
         sys.exit(1)
@@ -123,7 +123,7 @@ def myplotly(df1, df2, collection, title):
         title=title + df2['dt'][len(df2.index) - 1]
     )
     fig = go.Figure(data=data, layout=layout)
-    py.plot(fig, filename='map2', fileopt='overwrite', auto_open=False)
+    py.plot(fig, filename=collection, fileopt='overwrite', auto_open=False)
 
 def main():
     user_doc = {

@@ -13,7 +13,7 @@ from send import save2rabbitmqH1
 def save2mongoMap2(dbname, collection, doc):
     try:
         hostname = os.getenv('HOSTNAME')
-        hostname = 'x'
+        # hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
             print("cloud")
