@@ -46,10 +46,10 @@ def findlast2day(dbname, collection, title):
         # hostname = 'x'
         if hostname:
             c = MongoClient("mongodb://db1:user1@ds155684.mlab.com:55684/baidu")
-            print("cloud" + collection)
+            print("cloud " + collection)
         else:
             c = MongoClient("mongodb://user1:password1@localhost:27017/" + dbname)
-            print("local" + collection)
+            print("local " + collection)
     except ConnectionFailure as e:
         sys.stderr.write("Could not connect to MongoDB: %s" % e)
         sys.exit(1)
