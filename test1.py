@@ -40,7 +40,8 @@ def save2mongo(dbname,collection,doc):
     #save2rabbitmq(doc)
 
 
-def findlast2day(dbname, collection, title):
+def findlast2day(dbname, collection, title, statusScale):
+    fStatusScale = float(statusScale)
     try:
         hostname = os.getenv('HOSTNAME')
         # hostname = 'x'
@@ -73,7 +74,7 @@ def findlast2day(dbname, collection, title):
         row += 1
         dt = doc['dt']
         duration4 = int(doc['duration4']/60),
-        traffic_condition4 = doc['traffic_condition4']*5
+        traffic_condition4 = doc['traffic_condition4']*fStatusScale
         #print ('%s,%d,%d,%d,%d' % ( dt ,duration[0], traffic_condition[0], duration4[0], traffic_condition4) )
         if dt.startswith(d1):
             dt = dayAdd(dt, 1)
@@ -136,4 +137,4 @@ def main():
 
 
 if __name__ == "__main__":
-    findlast2day('baidu', sys.argv[1], sys.argv[2])
+    findlast2day('baidu', sys.argv[1], sys.argv[2], sys.argv[3])

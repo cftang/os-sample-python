@@ -153,5 +153,6 @@ def main():
     }
     save2mongo('baidu', 'mycoll', user_doc)
 
+
 if __name__ == "__main__":
     main()
