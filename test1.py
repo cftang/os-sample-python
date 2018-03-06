@@ -55,9 +55,9 @@ def findlast2day(dbname, collection, title, statusScale):
         sys.stderr.write("Could not connect to MongoDB: %s" % e)
         sys.exit(1)
     dbh = c[dbname]
-    c = dbh[collection].count() - 288*2
-    z = dbh[collection].find(projection={"dt": 1, "duration4": 1, "traffic_condition4": 1}, skip=c)\
-        .sort("dt", pymongo.ASCENDING)
+
+    z = dbh[collection].find(projection={"dt": 1})\
+        .sort("dt", pymongo.DESCENDING).limit(1)
 
     list1 = []
     list2 = []
@@ -66,17 +66,20 @@ def findlast2day(dbname, collection, title, statusScale):
     for doc in z:
         d2 = doc['dt']
     d2 = d2[0:10]
-    d1 = dayAdd(d2[0:10]+' 00:00:00', -1)[0:10]
-
-    z.rewind()
-    for doc in z: 
+    d1 = dayAdd(d2[0:10]+' 00:00:00', -1)
+    d1date = d1[0:10]
+    z = dbh[collection]\
+        .find({"dt": {"$gt": d1}},
+              projection={"dt": 1, "duration4": 1, "traffic_condition4": 1})\
+        .sort("dt", pymongo.ASCENDING)
+    for doc in z:
         #print(doc)
         row += 1
         dt = doc['dt']
         duration4 = int(doc['duration4']/60),
         traffic_condition4 = doc['traffic_condition4']*fStatusScale
         #print ('%s,%d,%d,%d,%d' % ( dt ,duration[0], traffic_condition[0], duration4[0], traffic_condition4) )
-        if dt.startswith(d1):
+        if dt.startswith(d1date):
             dt = dayAdd(dt, 1)
             list1.append({'dt': dt, 'duration4': duration4, 'traffic_condition4': traffic_condition4})
         elif dt.startswith(d2):
