@@ -33,9 +33,9 @@ def save2mongoMap2(dbname, collection, doc):
          'distance': doc['result']['taxi']['distance'],
          'duration': doc['result']['taxi']['duration'],
          'traffic_condition': doc['result']['traffic_condition'],
-         'distance4': doc['result']['routes'][0]['steps'][12]['distance'],
-         'duration4': doc['result']['routes'][0]['steps'][12]['duration'],
-         'traffic_condition4': doc['result']['routes'][0]['steps'][12]['traffic_condition']
+         'distance4': doc['result']['routes'][0]['steps'][15]['distance'],
+         'duration4': doc['result']['routes'][0]['steps'][15]['duration'],
+         'traffic_condition4': doc['result']['routes'][0]['steps'][15]['traffic_condition']
          }
     #z_mq = deepcopy(z)
 
