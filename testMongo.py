@@ -29,13 +29,20 @@ def save2mongoMap2(dbname, collection, doc):
     # gen_time = datetime.strptime(doc['dt'], '%Y-%m-%d %H:%M:%S')
     # dummy_id = ObjectId.from_datetime(gen_time)
 
+    distance4 = 25969
+    index = 0
+    for step in range(0, len(doc['result']['routes'][0]['steps'])):
+        print(step, doc['result']['routes'][0]['steps'][step]['distance'])
+        if doc['result']['routes'][0]['steps'][step]['distance'] == distance4:
+            index = step
+            break
     z = {'dt': doc['dt'],
          'distance': doc['result']['taxi']['distance'],
          'duration': doc['result']['taxi']['duration'],
          'traffic_condition': doc['result']['traffic_condition'],
-         'distance4': doc['result']['routes'][0]['steps'][15]['distance'],
-         'duration4': doc['result']['routes'][0]['steps'][15]['duration'],
-         'traffic_condition4': doc['result']['routes'][0]['steps'][15]['traffic_condition']
+         'distance4': doc['result']['routes'][0]['steps'][index]['distance'],
+         'duration4': doc['result']['routes'][0]['steps'][index]['duration'],
+         'traffic_condition4': doc['result']['routes'][0]['steps'][index]['traffic_condition']
          }
     #z_mq = deepcopy(z)
 
@@ -61,14 +68,21 @@ def save2mongoMap3(dbname,collection,doc):
     #gen_time = datetime.strptime(doc['dt'], '%Y-%m-%d %H:%M:%S') 
     #dummy_id = ObjectId.from_datetime(gen_time)
 
+    distance4 = 24669
+    index = 0
+    for step in range(0, len(doc['result']['routes'][0]['steps'])):
+        print(step, doc['result']['routes'][0]['steps'][step]['distance'])
+        if doc['result']['routes'][0]['steps'][step]['distance'] == distance4:
+            index = step
+            break
     z = {'dt': doc['dt'],
-             'distance': doc['result']['taxi']['distance'],
-             'duration': doc['result']['taxi']['duration'],
-             'traffic_condition': doc['result']['traffic_condition'],
-             'distance4': doc['result']['routes'][0]['steps'][4]['distance'],
-             'duration4': doc['result']['routes'][0]['steps'][4]['duration'],
-             'traffic_condition4': doc['result']['routes'][0]['steps'][4]['traffic_condition']
-             }
+         'distance': doc['result']['taxi']['distance'],
+         'duration': doc['result']['taxi']['duration'],
+         'traffic_condition': doc['result']['traffic_condition'],
+         'distance4': doc['result']['routes'][0]['steps'][index]['distance'],
+         'duration4': doc['result']['routes'][0]['steps'][index]['duration'],
+         'traffic_condition4': doc['result']['routes'][0]['steps'][index]['traffic_condition']
+         }
     #z_mq = deepcopy(z)
     
     dbh[collection].insert(z)
